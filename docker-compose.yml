@@ -1,0 +1,27 @@
+services:
+  jvm-lab:
+    build:
+      context: .
+    image: local/jvm-lab:21
+
+    init: true
+    restart: "no"
+
+    mem_limit: 384m
+    cpus: "1.0"
+
+    environment:
+      TZ: Asia/Taipei
+      JAVA_TIMEZONE: Asia/Taipei
+    
+      MODE: ${MODE:-idle}
+      THREADS: ${THREADS:-300}
+
+      JAVA_XMS: ${JAVA_XMS:-64m}
+      JAVA_XMX: ${JAVA_XMX:-128m}
+
+      JFR_SETTINGS: ${JFR_SETTINGS:-profile}
+      NMT: ${NMT:-true}
+
+    volumes:
+      - ./workspace:/workspace
