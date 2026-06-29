@@ -14,7 +14,7 @@ services:
       TZ: Asia/Taipei
       JAVA_TIMEZONE: Asia/Taipei
     
-      MODE: ${MODE:-idle}
+      MODE: ${MODE:-heap-oom}
       THREADS: ${THREADS:-300}
 
       JAVA_XMS: ${JAVA_XMS:-64m}

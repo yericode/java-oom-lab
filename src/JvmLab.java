@@ -57,7 +57,7 @@ public class JvmLab {
                 report("allocated about " + allocatedMb + " MB in BigObject");
             }
 
-            Thread.sleep(200);
+            Thread.sleep(1000);
         }
     }
 

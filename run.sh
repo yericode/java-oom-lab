@@ -1,7 +1,7 @@
 #!/bin/sh
 set -eu
 
-MODE="${MODE:-idle}"
+MODE="${MODE:-heap-oom}"
 THREADS="${THREADS:-300}"
 
 JAVA_XMS="${JAVA_XMS:-64m}"
@@ -53,6 +53,6 @@ exec java \
   "-XX:HeapDumpPath=/workspace/dumps" \
   -XX:+ExitOnOutOfMemoryError \
   "-Xlog:gc*:file=/workspace/logs/gc-${MODE}.log:time,uptime,level,tags:filecount=5,filesize=10m" \
-  "-XX:StartFlightRecording=name=${MODE},settings=${JFR_SETTINGS},dumponexit=true,filename=/workspace/jfr/${MODE}.jfr" \
+  "-XX:StartFlightRecording=name=${MODE},settings=${JFR_SETTINGS},disk=true,maxsize=256m,maxage=1h,dumponexit=true,filename=/workspace/jfr/${MODE}-%p-%t.jfr" \
   -cp /app/classes \
   JvmLab "$MODE" "$THREADS"
